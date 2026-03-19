@@ -1,0 +1,5 @@
+version: 1
+interface:
+  display_name: Wiggum Relay Loop
+  short_description: Relay one Cloud step at a time.
+  default_prompt: Use this skill to complete one bounded repo step, update handoff files, proactively roll over before context grows too large, spawn the next Cloud conversation, and stop.

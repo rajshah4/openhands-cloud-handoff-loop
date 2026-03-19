@@ -1,0 +1,54 @@
+{
+  "project_name": "three-step-demo",
+  "objective": "Demonstrate a relay-style OpenHands Cloud handoff loop across three bounded conversations.",
+  "current_step": "step_01_create_marker",
+  "status": "active",
+  "next_step": "step_01_create_marker",
+  "updated_at": "2026-03-19T00:00:00+00:00",
+  "conversation_limits": {
+    "max_turns_before_rollover": 8,
+    "max_files_reviewed_before_rollover": 10,
+    "max_notes_bytes_before_rollover": 12000,
+    "always_rollover_after_step": true
+  },
+  "relay": {
+    "pending_conversation_id": "",
+    "pending_start_task_id": "",
+    "last_spawned_title": "",
+    "last_spawned_at": "",
+    "handoff_token": ""
+  },
+  "steps": [
+    {
+      "id": "step_01_create_marker",
+      "title": "Create the first marker",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Create `.openhands/context/step_01.txt`",
+        "Update last_run and next_prompt for step 2"
+      ],
+      "last_result": ""
+    },
+    {
+      "id": "step_02_create_marker",
+      "title": "Create the second marker",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Create `.openhands/context/step_02.txt`",
+        "Update last_run and next_prompt for step 3"
+      ],
+      "last_result": ""
+    },
+    {
+      "id": "step_03_finish",
+      "title": "Finish the workflow",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Create `.openhands/context/step_03.txt`",
+        "Set workflow status to complete",
+        "Do not spawn another conversation"
+      ],
+      "last_result": ""
+    }
+  ]
+}

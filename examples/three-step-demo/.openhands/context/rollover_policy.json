@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "max_turns_before_rollover": 8,
+  "max_files_reviewed_before_rollover": 10,
+  "max_notes_bytes_before_rollover": 12000,
+  "always_rollover_after_step": true,
+  "rollover_message": "Start a new conversation instead of condensing context."
+}

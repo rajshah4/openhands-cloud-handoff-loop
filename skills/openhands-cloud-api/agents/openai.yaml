@@ -1,0 +1,5 @@
+version: 1
+interface:
+  display_name: OpenHands Cloud API
+  short_description: Use the Cloud V1 API precisely.
+  default_prompt: Use this skill when you need the exact OpenHands Cloud V1 API flow for creating conversations, polling start tasks, or reading conversation records and events.
