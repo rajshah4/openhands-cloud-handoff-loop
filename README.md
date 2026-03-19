@@ -78,3 +78,7 @@ This repo uses proactive rollover instead of waiting for condensing:
 - write the next prompt into repo files
 - spawn the next conversation
 - finish immediately
+
+## Next Evolution
+
+If you want to turn the demo into a plan-driven workflow, read [references/next-steps.md](references/next-steps.md).
