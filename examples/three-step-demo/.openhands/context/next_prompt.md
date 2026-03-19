@@ -9,5 +9,21 @@ Read first:
 Complete only the current step from `workflow_state.json`.
 If the workflow is not complete after your bounded step:
 - update the repo handoff files
-- spawn the next conversation with `scripts/launch_next_conversation.py --state-file workflow_state.json`
+- commit and push the updated repo state before spawning the next conversation
+- spawn the next conversation with:
+
+```bash
+OH_API_KEY="${OH_API_KEY:?missing OH_API_KEY}" \
+python scripts/launch_next_conversation.py \
+  --title "Three Step Demo Next Step" \
+  --repository <owner/repo> \
+  --branch main \
+  --prompt-file .openhands/context/next_prompt.md \
+  --state-file workflow_state.json
+```
+
 - stop immediately
+
+If the workflow is complete:
+- commit and push the final state
+- do not spawn another conversation

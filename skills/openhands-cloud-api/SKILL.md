@@ -29,6 +29,15 @@ Use:
 
 with bearer auth against `https://app.all-hands.dev`.
 
+Inside an OpenHands Cloud conversation, prefer commands that reference `OH_API_KEY` explicitly so the secret is materialized in that shell invocation.
+
+Preferred pattern:
+
+```bash
+OH_API_KEY="${OH_API_KEY:?missing OH_API_KEY}" \
+python skills/openhands-cloud-api/scripts/launch_next_conversation.py ...
+```
+
 ## Common Endpoints
 
 - `POST /api/v1/app-conversations`
@@ -43,6 +52,7 @@ Read [references/v1-cloud-api.md](references/v1-cloud-api.md) for payloads and c
 Use:
 
 ```bash
+OH_API_KEY="${OH_API_KEY:?missing OH_API_KEY}" \
 python skills/openhands-cloud-api/scripts/launch_next_conversation.py \
   --title "Next step" \
   --repository owner/repo \

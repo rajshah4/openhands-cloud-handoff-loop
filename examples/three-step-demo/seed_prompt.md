@@ -18,9 +18,11 @@ Requirements:
 - clear any stale relay fields before preparing the next prompt
 - rewrite `.openhands/context/next_prompt.md` for step 2
 - update `.openhands/context/last_run.md`
+- commit and push the step 1 state before spawning step 2
 - spawn the next conversation with:
 
 ```bash
+OH_API_KEY="${OH_API_KEY:?missing OH_API_KEY}" \
 python scripts/launch_next_conversation.py \
   --title "Three Step Demo Step 2" \
   --repository <owner/repo> \

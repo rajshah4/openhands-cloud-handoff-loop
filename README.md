@@ -25,6 +25,29 @@ Use the relay-loop skill when the workflow should:
 - roll over to a new conversation before context gets too large
 - stop immediately after spawning the next conversation
 
+## Operational Rules
+
+- Pass `OH_API_KEY` explicitly when invoking the handoff helper from inside Cloud conversations.
+- Push each step's repo state before spawning the next conversation.
+- Push the final completion commit before finishing the last conversation.
+
+## Verified Run
+
+Verified live on March 19, 2026 against `rajshah4/oh-test-handoff-three-step-v2`.
+
+Successful Cloud conversation chain:
+
+- step 1: `5b51d9ba21c047e8b964f15636d84b2a`
+- step 2: `68aca76d558e45c4a3d1702de840f51c`
+- step 3: `2bd7b47605b44899ba3b63ca06a3de2b`
+
+Verified remote result:
+
+- branch `main` ended at commit `2d43c28`
+- `workflow_state.json` reached `status: "complete"`
+- `.openhands/context/step_01.txt`, `.openhands/context/step_02.txt`, and `.openhands/context/step_03.txt` all exist
+- the final conversation committed and pushed the terminal state before finishing
+
 ## Rollover
 
 This repo uses proactive rollover instead of waiting for condensing:

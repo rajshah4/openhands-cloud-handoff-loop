@@ -38,7 +38,13 @@ def cloud_api_url() -> str:
 
 
 def cloud_api_key() -> str:
-    return os.getenv("OPENHANDS_API_KEY") or os.getenv("OH_API_KEY") or require_env("OH_API_KEY")
+    value = os.getenv("OPENHANDS_API_KEY") or os.getenv("OH_API_KEY")
+    if value:
+        return value
+    raise RuntimeError(
+        "Missing OpenHands Cloud API key. Pass it explicitly in the shell invocation, "
+        'for example: OH_API_KEY="${OH_API_KEY:?missing OH_API_KEY}" python scripts/launch_next_conversation.py ...'
+    )
 
 
 def cloud_request(

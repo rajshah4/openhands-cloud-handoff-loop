@@ -48,6 +48,7 @@ Read [references/context-rollover.md](references/context-rollover.md).
 Use the Cloud API helper skill or its script:
 
 ```bash
+OH_API_KEY="${OH_API_KEY:?missing OH_API_KEY}" \
 python skills/openhands-cloud-api/scripts/launch_next_conversation.py \
   --title "Next workflow step" \
   --repository owner/repo \
@@ -56,6 +57,10 @@ python skills/openhands-cloud-api/scripts/launch_next_conversation.py \
   --state-file workflow_state.json
 ```
 
+Always pass `OH_API_KEY` explicitly on the command line like the example above.
+
+Do not assume the runtime shell will automatically inject the secret into child commands unless the command references it directly.
+
 ## Final Step
 
 If the workflow is complete:
@@ -63,4 +68,8 @@ If the workflow is complete:
 - set `status` to `complete`
 - set `next_step` to `""`
 - clear relay pending ids
+- commit the final state
+- push the final state to the tracked remote branch
 - do not spawn another conversation
+
+Do not call the workflow complete until the final commit is visible on the remote branch.
