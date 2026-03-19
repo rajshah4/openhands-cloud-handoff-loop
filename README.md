@@ -31,22 +31,43 @@ Use the relay-loop skill when the workflow should:
 - Push each step's repo state before spawning the next conversation.
 - Push the final completion commit before finishing the last conversation.
 
-## Verified Run
+## Run The Three-Step Test
 
-Verified live on March 19, 2026 against `rajshah4/oh-test-handoff-three-step-v2`.
+Use `examples/three-step-demo/` as the seed for a real GitHub test repo.
 
-Successful Cloud conversation chain:
+1. Create a fresh GitHub repo and copy the example files into it.
+2. Copy `skills/openhands-cloud-api/scripts/launch_next_conversation.py` into that test repo as `scripts/launch_next_conversation.py`.
+3. Replace `<owner/repo>` in:
+   - `examples/three-step-demo/seed_prompt.md`
+   - `examples/three-step-demo/.openhands/context/next_prompt.md`
+   with your real `owner/repo`.
+4. Commit and push the seeded repo to `main`.
+5. Launch step 1 from a machine that has your OpenHands Cloud API key:
 
-- step 1: `5b51d9ba21c047e8b964f15636d84b2a`
-- step 2: `68aca76d558e45c4a3d1702de840f51c`
-- step 3: `2bd7b47605b44899ba3b63ca06a3de2b`
+```bash
+export OH_API_KEY="..."
+python scripts/launch_next_conversation.py \
+  --title "Three Step Demo Step 1" \
+  --repository owner/repo \
+  --branch main \
+  --prompt-file seed_prompt.md
+```
 
-Verified remote result:
+6. Wait for the Cloud chain to run:
+   - step 1 pushes state, then spawns step 2
+   - step 2 pushes state, then spawns step 3
+   - step 3 pushes final state and stops without spawning again
+7. Verify the repo on `main`:
+   - `workflow_state.json` has `status: "complete"`
+   - `.openhands/context/step_01.txt` exists
+   - `.openhands/context/step_02.txt` exists
+   - `.openhands/context/step_03.txt` exists
 
-- branch `main` ended at commit `2d43c28`
-- `workflow_state.json` reached `status: "complete"`
-- `.openhands/context/step_01.txt`, `.openhands/context/step_02.txt`, and `.openhands/context/step_03.txt` all exist
-- the final conversation committed and pushed the terminal state before finishing
+Important:
+
+- The spawn command inside Cloud must reference `OH_API_KEY` explicitly.
+- Each step must push before spawning the next conversation.
+- The final step must push before finishing.
 
 ## Rollover
 
