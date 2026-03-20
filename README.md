@@ -13,6 +13,8 @@ The repo is centered on two related skills:
 - `skills/wiggum-relay-loop/`
   A relay workflow pattern where each conversation completes one bounded unit of work, updates handoff files, spawns the next conversation, and exits.
 
+For a better deeper dive on the subagents skills, check out the [full skill here](https://github.com/neubig/workflow/blob/main/skills/sub-agent-delegation/SKILL.md)
+
 Supporting material:
 
 - `examples/three-step-demo/`
