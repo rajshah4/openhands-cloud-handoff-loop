@@ -31,6 +31,20 @@ Use `openhands-cloud-api` when you need the exact Cloud API behavior:
 - fetch conversation metadata
 - automate startup from a helper script
 
+### Reading V1 child conversation messages
+
+If you need the output from a `V1` child conversation, use the SDK agent server
+event search route:
+
+`{agent_url}/api/conversations/{conversation_id}/events/search?limit=...`
+
+That route returns SDK event objects under `items`, including `MessageEvent`
+entries with `llm_message.role` and `llm_message.content`.
+
+Do not use the old `V0` route `/api/conversations/{id}/events` for `V1`
+children, and do not assume the app-server route
+`/api/v1/conversation/{id}/events/search` will contain message events.
+
 Use `wiggum-relay-loop` when the workflow should:
 
 - avoid one long-lived conversation

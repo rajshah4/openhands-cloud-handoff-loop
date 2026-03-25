@@ -7,6 +7,22 @@ Use these endpoints for Cloud-side automation:
 - `GET /api/v1/app-conversations`
 - `GET /api/v1/conversation/{app_conversation_id}/events/search`
 
+## Reading child conversation messages
+
+If you need `MessageEvent` output from a `V1` child conversation, query the SDK
+agent server instead of the old `V0` events route.
+
+Use:
+
+`{agent_url}/api/conversations/{conversation_id}/events/search?limit=...`
+
+Notes:
+
+- the SDK agent server exposes `/events/search`, not `/events`
+- `V1` child conversations are not stored in the `V0` ConversationStore
+- `/api/v1/conversation/{app_conversation_id}/events/search` on the app server
+  should not be treated as the source of child `MessageEvent` items
+
 ## Auth
 
 Use `OH_API_KEY` or `OPENHANDS_API_KEY` as a bearer token.
